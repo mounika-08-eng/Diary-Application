@@ -37,6 +37,9 @@ A web-based diary application that allows users to register, log in, and manage 
 ## Project Structure
 
 ```text
+## Project Structure
+
+```text
 Dairy_project/
 │
 ├── Backend/
@@ -45,14 +48,25 @@ Dairy_project/
 │   ├── package-lock.json
 │   └── ...
 │
-├── registration.html
-├── login.html
-├── feedpage.html
-├── post.html
-├── dedicated.html
+├── Frontend/
+│   ├── registration.html
+│   ├── login.html
+│   ├── feedpage.html
+│   ├── post.html
+│   ├── dedicated.html
+│   ├── *.css
+│   └── ...
+│
 ├── README.md
 └── .gitignore
 ```
+
+**Folder description:**
+- `Backend/` — Contains the Node.js and Express.js server, database connection, and API routes.
+- `Frontend/` — Contains the HTML pages, CSS stylesheets, and frontend JavaScript files.
+- `README.md` — Provides project information and setup instructions.
+- `.gitignore` — Excludes files such as `.env` and `node_modules` from Git tracking.
+
 
 *Note: Adjust the file names and locations above to match your actual project structure.*
 
