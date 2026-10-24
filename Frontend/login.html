@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dairy</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="./login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap" rel="stylesheet">
+  </head>
+  <body class="d-flex justify-content-center align-items-center" style="height:100vh;">
+    <div class="card login-card" style="width: 500px;">
+  
+  <div class="card-body text-center">
+    <h1 class="card-title">Welcome</h1>
+    <p class="card-text">Please login to continue </p>
+    <form action="" class="text-start" id="LoginForm">
+        <div class="mb-3">
+  <label for="emailInput" class="form-label" >Email address</label>
+  <input type="email" class="form-control" id="emailInput" name="email"  placeholder="name@example.com" autocomplete="off" required>
+</div>
+<div class="mb-3">
+  <label for="passwordInput" class="form-label">Password</label>
+  <input type="password" class="form-control" id="passwordInput" name="password" autocomplete="off" required >
+</div>
+  <p>Don't have an account? <a href="./registration.html">Register Here</a></p>
+  <p id="loginMessage" class="text-danger" role="alert"></p>
+  <button class="btn w-100" id="LoginButton"  type="submit">Login</button>
+    </form>
+   <!-- <a href="./feedpage.html" class="btn form-control" id="LoginButton">Login</a>-->
+  </div>
+</div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.min.js" integrity="sha384-G/EV+4j2dNv+tEPo3++6LCgdCROaejBqfUeNjuKAiuXbjrxilcCdDz6ZAVfHWe1Y" crossorigin="anonymous"></script>
+ 
+<script>
+    const form = document.getElementById('LoginForm');
+
+    const emailInput = document.getElementById('emailInput');
+    const passwordInput = document.getElementById('passwordInput');
+    const loginMessage = document.getElementById('loginMessage');
+
+    // Start with blank fields when the login page opens
+    form.reset();
+    loginMessage.textContent = '';
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        loginMessage.textContent = '';
+
+        const formData = new URLSearchParams();
+        formData.append('email', emailInput.value.trim());
+        formData.append('password', passwordInput.value);
+
+        try {
+            const response = await fetch(
+                'http://localhost:3000/userLogin',
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: formData
+                }
+            );
+
+            const body = await response.json();
+
+            if (!response.ok) {
+                loginMessage.textContent = body.message;
+                passwordInput.value = '';
+                passwordInput.focus();
+                return;
+            }
+
+            // Save the ID only after successful login
+            localStorage.setItem('userID', body.userID);
+
+            window.location.href = './feedpage.html';
+
+        } catch (error) {
+            console.error('Login error:', error);
+
+            loginMessage.textContent =
+                'Unable to connect to the server. Please try again.';
+        }
+    });
+</script>
+<script>
+    window.addEventListener('pageshow', function () {
+        const form = document.getElementById('LoginForm');
+
+        if (form) {
+            form.reset();
+        }
+    });
+</script>
+
+  
+</body>
+</html>

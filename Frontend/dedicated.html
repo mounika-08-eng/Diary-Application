@@ -1,0 +1,88 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Diary Post</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet" href="./dedicated.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+    <div class="post-container">
+        <a href="./feedpage.html" class="back-button">
+            &larr; Back to Feed
+        </a>
+
+        <article class="post">
+            <h1 id="postTitle">Loading post...</h1>
+            <p id="postDescription"></p>
+        </article>
+    </div>
+
+    <script>
+        async function loadSinglePost() {
+            const titleElement = document.getElementById('postTitle');
+            const descriptionElement =
+                document.getElementById('postDescription');
+
+            const userID = localStorage.getItem('userID');
+            const params = new URLSearchParams(window.location.search);
+            const postID = params.get('id');
+
+            if (!userID) {
+                window.location.href = './login.html';
+                return;
+            }
+
+            if (!postID || !/^\d+$/.test(postID)) {
+                titleElement.textContent = 'Post not found';
+                descriptionElement.textContent =
+                    'Please return to your feed and select a post.';
+                return;
+            }
+
+            try {
+                const response = await fetch(
+                    `http://localhost:3000/userPosts/${encodeURIComponent(userID)}/${encodeURIComponent(postID)}`
+                );
+
+                if (response.status === 404) {
+                    titleElement.textContent = 'Post not found';
+                    descriptionElement.textContent =
+                        'This post does not exist or does not belong to your account.';
+                    return;
+                }
+
+                if (!response.ok) {
+                    throw new Error(`Server error: ${response.status}`);
+                }
+
+                const post = await response.json();
+
+                titleElement.textContent = post.postTitle;
+                descriptionElement.textContent = post.postDescription;
+
+                document.title = post.postTitle + ' | My Diary';
+
+            } catch (error) {
+                console.error('Error loading post:', error);
+                titleElement.textContent = 'Unable to load post';
+                descriptionElement.textContent =
+                    'Please try again later.';
+            }
+        }
+
+        loadSinglePost();
+    </script>
+</body>
+</html>

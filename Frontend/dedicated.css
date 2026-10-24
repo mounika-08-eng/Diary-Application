@@ -1,0 +1,66 @@
+
+body {
+    font-family: "Comfortaa", sans-serif;
+    background-color: #f4fff9;
+    min-height: 100vh;
+    margin: 0;
+    padding: 40px 16px;
+}
+
+.post-container {
+    width: 100%;
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.back-button {
+    display: inline-block;
+    margin-bottom: 22px;
+    color: #1769d2;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.back-button:hover {
+    text-decoration: underline;
+}
+
+.post {
+    background: #ffffff;
+    border: 1px solid #d9e7df;
+    border-radius: 16px;
+    padding: 36px;
+    box-shadow: 0 5px 18px rgba(0, 0, 0, 0.08);
+}
+
+.post h1 {
+    font-size: 32px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+    overflow-wrap: anywhere;
+}
+
+.post p {
+    font-size: 17px;
+    line-height: 2;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 20px 12px;
+    }
+
+    .post {
+        padding: 22px;
+    }
+
+    .post h1 {
+        font-size: 25px;
+    }
+
+    .post p {
+        font-size: 15px;
+    }
+}

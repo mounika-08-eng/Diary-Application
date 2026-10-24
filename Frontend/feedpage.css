@@ -1,0 +1,71 @@
+
+body {
+    font-family: "Comfortaa", sans-serif;
+    background-color: #f4fff9;
+    margin: 0;
+    min-height: 100vh;
+}
+
+.all {
+    width: 85%;
+    max-width: 1000px;
+    margin: 25px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.diary-card {
+    background-color: #ffffff;
+    border: 1px solid #d9e7df;
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.diary-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 7px 18px rgba(0, 0, 0, 0.12);
+}
+
+.diary-card h2 {
+    font-size: 26px;
+    margin-bottom: 14px;
+    overflow-wrap: anywhere;
+}
+
+.post-preview {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    overflow-wrap: anywhere;
+}
+
+.viewPostButton {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(90deg, #8957f5, #10a9e8);
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+}
+
+.viewPostButton:hover {
+    color: white;
+    opacity: 0.9;
+}
+
+@media (max-width: 600px) {
+    .all {
+        width: 92%;
+    }
+
+    .diary-card {
+        padding: 16px;
+    }
+}
